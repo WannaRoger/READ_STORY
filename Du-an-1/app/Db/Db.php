@@ -14,7 +14,7 @@ class Db {
     * @param string $username Tên đăng nhập cơ sở dữ liệu.
     * @param string $password Mật khẩu cơ sở dữ liệu.
     */
-    public function __construct($host = DB_HOST, $dbname = DB_NAME, $username = DB_USERNAME, $password = DB_PASSWORD)
+    public function __construct($host = localhost, $dbname = du_an_1, $username = root, $password = '')
     {
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
         try {
