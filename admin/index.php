@@ -1,8 +1,4 @@
-<?php session_start() ?>
-<?php if (!isset($_SESSION['admin'])) {
-    echo '<script> location.href="../auth/dang-nhap.php";</script>';
-}
-?>
+
 
 <link rel="stylesheet" href="../assets/css/admin-dashboard.css" type="text/css" />
 </head>
