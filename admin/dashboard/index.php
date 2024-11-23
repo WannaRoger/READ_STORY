@@ -9,9 +9,47 @@ SELECT COUNT(tai_khoan_id) AS count_tai_khoan
 FROM tai_khoan
 EOT;
 $result_tai_khoan = mysqli_query($conn, $sql_tai_khoan);
-$data_tai_khoan =  mysqli_fetch_array($result_tai_khoan, MYSQLI_ASSOC);
-//  select du lieu truyen
+$data_tai_khoan = mysqli_fetch_array($result_tai_khoan, MYSQLI_ASSOC);
 
+$sql_truyen = <<<EOT
+SELECT COUNT(truyen_id) AS count_truyen
+FROM truyen
+EOT;
+$result_truyen = mysqli_query($conn, $sql_truyen);
+$data_truyen = mysqli_fetch_array($result_truyen, MYSQLI_ASSOC);
+
+$sql_chapter = <<<EOT
+SELECT COUNT(chapter_id) AS count_chapter
+FROM chapter
+EOT;
+$result_chapter = mysqli_query($conn, $sql_chapter);
+$data_chapter = mysqli_fetch_array($result_chapter, MYSQLI_ASSOC);
+
+$sql_top_view = <<<EOT
+SELECT truyen_id,truyen_ma,truyen_ten,truyen_tac_gia,truyen_mo_ta,truyen_anh_dai_dien,truyen_tinh_trang,
+truyen_luot_xem,truyen_ngay_dang,truyen_trang_thai
+FROM truyen
+WHERE truyen_trang_thai = "1"
+ORDER BY truyen_luot_xem DESC
+LIMIT 3
+    
+EOT;
+$result_top_view = mysqli_query($conn, $sql_top_view);
+$data_top_view = [];
+while ($row = mysqli_fetch_array($result_top_view, MYSQLI_ASSOC)) {
+    $data_top_view[] = array(
+        'truyen_id' => $row['truyen_id'],
+        'truyen_ma' => $row['truyen_ma'],
+        'truyen_ten' => $row['truyen_ten'],
+        'truyen_tac_gia' => $row['truyen_tac_gia'],
+        'truyen_mo_ta' => $row['truyen_mo_ta'],
+        'truyen_anh_dai_dien' => $row['truyen_anh_dai_dien'],
+        'truyen_tinh_trang' => $row['truyen_tinh_trang'],
+        'truyen_luot_xem' => $row['truyen_luot_xem'],
+        'truyen_ngay_dang' => strtotime($row['truyen_ngay_dang']),
+        'truyen_trang_thai' => $row['truyen_trang_thai'],
+    );
+}
 ?>
 
 
@@ -46,6 +84,7 @@ $data_tai_khoan =  mysqli_fetch_array($result_tai_khoan, MYSQLI_ASSOC);
                 <span class="text">
                     <h3>Truyện tranh</h3>
                     <p><?= $data_truyen['count_truyen'] ?></p>
+                    <p><?= $data_truyen['count_truyen'] ?></p>
                 </span>
             </li>
             <li>
@@ -67,7 +106,22 @@ $data_tai_khoan =  mysqli_fetch_array($result_tai_khoan, MYSQLI_ASSOC);
         <!-- Top -->
         <ul class="box-info">
             <!-- Top view  -->
-
+            <?php $num = 0; ?>
+            <?php foreach ($data_top_view as $item): ?>
+                <?php $num++ ?>
+                <li>
+                    <div class="item-poster">
+                        <div class="box-title-3 background-<?= $num ?>"><i class="fa-solid fa-star"></i> TOP <?= $num ?></div>
+                        <div class="item-thumbnail">
+                            <img src="../assets/uploads/<?= $item['truyen_anh_dai_dien'] ?>">
+                        </div>
+                        <div class="box-title-4"><?= $item['truyen_ten'] ?></div>
+                        <div class="background-1"><i class="fas fa-eye"></i> <?= thousand_format($item['truyen_luot_xem']) ?>
+                        </div>
+                        <div class="background-2"><i class="fas fa-clock"></i> <?= get_time_ago($item['truyen_ngay_dang']) ?>
+                        </div>
+                    </div>
+                <?php endforeach ?>
             </li>
         </ul>
     </main>
