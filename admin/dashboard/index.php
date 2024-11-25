@@ -32,7 +32,7 @@ FROM truyen
 WHERE truyen_trang_thai = "1"
 ORDER BY truyen_luot_xem DESC
 LIMIT 3
-    
+
 EOT;
 $result_top_view = mysqli_query($conn, $sql_top_view);
 $data_top_view = [];
@@ -122,7 +122,7 @@ while ($row = mysqli_fetch_array($result_top_view, MYSQLI_ASSOC)) {
                         </div>
                     </div>
                 <?php endforeach ?>
-            </li>
+                </li>
         </ul>
     </main>
     <!-- MAIN -->

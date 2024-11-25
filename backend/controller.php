@@ -41,5 +41,6 @@ if (isset($_GET['tim-kiem'])) {
             break;
     }
 } else {
-    include_once(__DIR__ . '/../frontend/pages/main.php');
+    // include_once(__DIR__ . '/../frontend/pages/main.php');
+    echo "404";
 }
