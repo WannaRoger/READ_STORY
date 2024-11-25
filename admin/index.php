@@ -19,11 +19,13 @@
     <?php include_once(__DIR__ . '/../backend/dbconnect.php'); ?>
 
     <!-- navigation -->
+    <?php include_once(__DIR__ . '/../frontend/partials/admin-sidebar.php'); ?>
 
     <!-- content -->
     <?php include_once(__DIR__ . '/controller.php'); ?>
 
     <!-- Nhúng file quản lý phần SCRIPT JAVASCRIPT -->
+    <?php include_once(__DIR__ . '/../frontend/layouts/admin-scripts.php'); ?>
 
 </body>
 <?php
