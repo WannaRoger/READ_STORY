@@ -2,7 +2,6 @@
 include_once(__DIR__ . '/../../backend/dbconnect.php');
 include_once(__DIR__ . '/../../backend/custom_fomart.php');
 
-
 // select dữ liệu
 $sql_tai_khoan = <<<EOT
 SELECT COUNT(tai_khoan_id) AS count_tai_khoan
