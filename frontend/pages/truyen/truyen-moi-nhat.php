@@ -10,7 +10,7 @@
         ORDER BY truyen_id DESC
         LIMIT 8
     EOT;
-    $result_truyen_moi = mysqli_query($conn, $sql_truyen_moi);
+        $result_truyen_moi = mysqli_query($conn, $sql_truyen_moi);
         $data_truyen_moi = [];
         while ($row = mysqli_fetch_array($result_truyen_moi, MYSQLI_ASSOC)) {
             $data_truyen_moi[] = array(
@@ -27,7 +27,8 @@
             );
         }
 ?>
-<!-- Truyện mới -->
+
+<!-- Truyện-mới -->
 <section>
     <div class="column-left new">
         <a href="index.php?truyen-manga=tat-ca-truyen-moi">

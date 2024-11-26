@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-10">
-               <span> Thắng , Quỳnh , Kiệt</span>
+                <span> Thắng , Quỳnh , Kiệt</span>
             </div>
         </div>
     </div>

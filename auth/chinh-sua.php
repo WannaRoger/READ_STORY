@@ -63,71 +63,82 @@
         <?php
         include_once(__DIR__ . '../../backend/dbconnect.php');
 
-        // kiểm tra get có id không
+        // Kiểm tra và lấy ID từ SESSION
         if (isset($_SESSION['user_tai_khoan_id'])) {
-            $tai_khoan_id = $_SESSION['user_tai_khoan_id'];
+            $tai_khoan_id = mysqli_real_escape_string($conn, $_SESSION['user_tai_khoan_id']);
+        } else {
+            die("Không tìm thấy tài khoản ID.");
         }
-        // selcet thông tin từ id
-        $data_old = <<<EOT
-            SELECT * 
-            FROM tai_khoan
-            WHERE tai_khoan_id = $tai_khoan_id;
-    EOT;
-        $status_old = mysqli_query($conn, $data_old);
+
+        // Truy vấn thông tin tài khoản cũ
+        $sql_old = "SELECT * FROM tai_khoan WHERE tai_khoan_id = '$tai_khoan_id'";
+        $status_old = mysqli_query($conn, $sql_old);
+        if ($status_old === false) {
+            die("Lỗi truy vấn SQL: " . mysqli_error($conn));
+        }
+
         $data_old = mysqli_fetch_array($status_old, MYSQLI_ASSOC);
-        // Hiển thị tất cả lỗi php
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-        // kiểm tra sự kiện nhấn nút đăng nhập
+        if (!$data_old) {
+            die("Không tìm thấy thông tin tài khoản.");
+        }
+
+        // Xử lý sự kiện cập nhật
         $check = true;
         $msg = "";
 
         if (isset($_POST['update'])) {
             $ten_hien_thi = $_POST['ten_hien_thi'];
             $ten_tai_khoan = $_POST['ten_tai_khoan'];
-            $mat_khau = $_POST['mat_khau'] == $data_old['mat_khau'] ? $data_old['mat_khau'] : ($_POST['mat_khau']);
+            $mat_khau = ($_POST['mat_khau'] === $data_old['mat_khau'])
+                ? $data_old['mat_khau']
+                : password_hash($_POST['mat_khau'], PASSWORD_DEFAULT);
             $trang_thai = '1';
             $phan_quyen = '2';
 
+            // Kiểm tra dữ liệu đầu vào
             if (strlen($ten_hien_thi) < 3 || strlen($ten_hien_thi) > 20) {
                 $check = false;
-                $msg = "Tên hiển thị phải lớn hơn 3 ký tự";
+                $msg = "Tên hiển thị phải lớn hơn 3 ký tự và nhỏ hơn 20 ký tự.";
             } elseif (strlen($ten_tai_khoan) < 3) {
                 $check = false;
-                $msg = "Tên tài khoản phải lớn hơn 3 ký tự";
+                $msg = "Tên tài khoản phải lớn hơn 3 ký tự.";
             } elseif (strlen($_POST['mat_khau']) < 6) {
                 $check = false;
-                $msg = "Mật khẩu phải lớn hơn 6 ký tự";
+                $msg = "Mật khẩu phải lớn hơn 6 ký tự.";
             } else {
-                include_once(__DIR__ . '../../backend/dbconnect.php');
-                $sql_check = <<<EOT
-                        SELECT * FROM tai_khoan WHERE ten_tai_khoan = '$ten_tai_khoan' && tai_khoan_id != '$tai_khoan_id'
-    EOT;
+                // Kiểm tra tài khoản đã tồn tại
+                $sql_check = "SELECT * FROM tai_khoan WHERE ten_tai_khoan = '$ten_tai_khoan' AND tai_khoan_id != '$tai_khoan_id'";
                 $status_check = mysqli_query($conn, $sql_check);
                 $data_check = mysqli_fetch_array($status_check, MYSQLI_ASSOC);
 
-                if (isset($data_check)) {
+                if ($data_check) {
                     $check = false;
-                    $msg = "Tài khoản đã tồn tại";
+                    $msg = "Tài khoản đã tồn tại.";
                 } else {
-                    $sql = <<<EOT
-                        UPDATE tai_khoan SET 
+                    // Cập nhật dữ liệu
+                    $sql = "UPDATE tai_khoan SET 
                         ten_hien_thi = '$ten_hien_thi',
-                         ten_tai_khoan ='$ten_tai_khoan',
-                         mat_khau = '$mat_khau',
-                         trang_thai = '$trang_thai', 
-                         phan_quyen ='$phan_quyen'
-                         WHERE tai_khoan_id = '$tai_khoan_id'
-                        
-    EOT;
+                        ten_tai_khoan = '$ten_tai_khoan',
+                        mat_khau = '$mat_khau',
+                        trang_thai = '$trang_thai', 
+                        phan_quyen = '$phan_quyen'
+                    WHERE tai_khoan_id = '$tai_khoan_id'";
                     $status = mysqli_query($conn, $sql);
-                    $data = mysqli_fetch_array($status, MYSQLI_ASSOC);
-                    echo "<script> location.href='./dang-nhap.php?status=success';</script>";
+                    if ($status === false) {
+                        die("Lỗi cập nhật: " . mysqli_error($conn));
+                    }
+                    echo "<script> location.href='./dang-nhap.php?status=success'; </script>";
                 }
             }
         }
+
+        // Hiển thị thông báo lỗi nếu có
+        if (!$check) {
+            echo "<p style='color:red;'>$msg</p>";
+        }
         ?>
+
+
 
         <form class="form-group" id="frm_login" method="post" action="">
             <div id="user-center">
