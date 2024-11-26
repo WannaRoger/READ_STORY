@@ -18,7 +18,7 @@
         $result_chapter_moi= mysqli_query($conn, $sql_chapter_moi);
         $data_chapter_moi = mysqli_fetch_array($result_chapter_moi, MYSQLI_ASSOC);
 
-        // chap đầu
+    // chap đầu
     $sql_chapter_dau_tien = <<<EOT
     SELECT chapter_so, chapter_id, chapter_ten, chapter_ngay_cap_nhat
     FROM chapter
@@ -55,6 +55,7 @@
         }
    
 ?>
+
 <div class="container-cs">
     <div class="container-lm">
         <section>
@@ -157,11 +158,12 @@
             <?php require_once __DIR__.'../../truyen/truyen-top-view.php'?>
 
         </section>
+
         <!-- truyen mới nhất -->
-        <?php require_once __DIR__.'../../truyen/truyen-moi-nhat.php'?>
         <section>
 
         </section>
+
         <!-- truyen ngau nhien -->
         <section>
             <?php require_once __DIR__.'/../truyen/truyen-ngau-nhien.php'?>
