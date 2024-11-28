@@ -306,10 +306,13 @@ if(isset($_SESSION['user_tai_khoan_id'])){
         </div>
 
         <?php foreach ($data as $item) : ?>
-        <div class="chapter-content text-center">
-            <img src="./assets/uploads/<?=$item['chapter_noi_dung']?>" class="img-fluid">
-        </div>
-        <?php endforeach?>
+    <div class="chapter-content text-center">
+        <div class="chapter-image">
+        <img src="./assets/uploads/<?=$item['chapter_noi_dung']?>" class="img-fluid">
+        <button class="save-button" onclick="savePage('<?=$item['chapter_noi_dung_id']?>')">Lưu trang</button>
+    </div></div>
+<?php endforeach; ?>
+
 
         <div class="manga-action">
             <div class="manga-action" id="manga-action">
