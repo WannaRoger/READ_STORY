@@ -89,7 +89,7 @@
         if (isset($_POST['update'])) {
             $ten_hien_thi = $_POST['ten_hien_thi'];
             $ten_tai_khoan = $_POST['ten_tai_khoan'];
-            $mat_khau = ($_POST['mat_khau'] === $data_old['mat_khau'])
+            $mat_khau = md5($_POST['mat_khau'] === $data_old['mat_khau'])
                 ? $data_old['mat_khau']
                 : password_hash($_POST['mat_khau'], PASSWORD_DEFAULT);
             $trang_thai = '1';
@@ -158,11 +158,6 @@
 
                     <div class="text-center">
                         <div class="user-title">CHỈNH SỬA</div>
-                    </div>
-                    <div class="mb-5">
-                        <label for="ten_hien_thi" class="form-label">ID</label>
-                        <input type="text" class="form-control" name="tai_khoan_id"
-                            value="<?= $data_old['tai_khoan_id'] ?>" readonly="">
                     </div>
                     <div class="mb-5">
                         <label for="ten_hien_thi" class="form-label">Tên hiển thị</label>

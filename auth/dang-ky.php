@@ -30,7 +30,7 @@
         if (isset($_POST['signup'])) {
             $ten_hien_thi = $_POST['ten_hien_thi'];
             $ten_tai_khoan = $_POST['ten_tai_khoan'];
-            $mat_khau = ($_POST['mat_khau']);
+            $mat_khau = md5($_POST['mat_khau']);
             $trang_thai = '1';
             $phan_quyen = '2';
 

@@ -32,7 +32,7 @@ if (isset($_SESSION['user'])) {
 
         if (isset($_POST['login'])) {
             $ten_tai_khoan = $_POST['ten_tai_khoan'];
-            $mat_khau = ($_POST['mat_khau']);
+            $mat_khau = md5($_POST['mat_khau']);
 
             include_once(__DIR__ . '../../backend/dbconnect.php');
             $sql = <<<EOT

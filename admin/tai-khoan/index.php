@@ -49,7 +49,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                 <table id="table_tai-khoan" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>STT</th>
                             <th>Tên hiển thị</th>
                             <th>Tên tài khoản</th>
                             <th>Mật khẩu</th>
@@ -65,7 +65,9 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     <tbody>
                         <?php foreach ($data as $item): ?>
                             <tr>
-                                <td><?= $item['tai_khoan_id'] ?></td>
+                                <td>
+                                    <p><?= $item['tai_khoan_id'] ?></p>
+                                </td>
                                 <td><?= $item['ten_hien_thi'] ?></td>
                                 <td><?= $item['ten_tai_khoan'] ?></td>
                                 <td><?= $item['mat_khau'] ?></td>

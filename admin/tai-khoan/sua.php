@@ -22,7 +22,7 @@ error_reporting(E_ALL);
 if (isset($_POST['btn_update_tai_khoan'])) {
     $ten_hien_thi = $_POST['ten_hien_thi'];
     $ten_tai_khoan = $_POST['ten_tai_khoan'];
-    $mat_khau = $_POST['mat_khau'] == $data_old['mat_khau'] ? $data_old['mat_khau'] : ($_POST['mat_khau']);
+    $mat_khau = $_POST['mat_khau'] == $data_old['mat_khau'] ? $data_old['mat_khau'] : md5($_POST['mat_khau']);
     $phan_quyen = $_POST['phan_quyen'];
     $trang_thai = $_POST['trang_thai'];
 
