@@ -59,7 +59,6 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                             <th>#</th>
                             <th>Tên truyện</th>
                             <th>Tác giả</th>
-                            <th>Mô tả</th>
                             <th>Thể loại</th>
                             <th>Tình trạng</th>
                             <th>Lượt xem</th>
