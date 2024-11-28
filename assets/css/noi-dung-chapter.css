@@ -269,24 +269,26 @@ section.chapter .manga-content {
 
 /* nút lưu trang */
 
+.page-container {
+  position: relative;
+  display: inline-block;
+}
 
-.chapter-image .save-button {
+.save-button {
+  display: none;
   position: absolute;
   bottom: 10px;
-  right: 10px;
-  background-color: #ff4500;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: #007bff;
   color: white;
-  padding: 8px 12px;
   border: none;
+  padding: 5px 10px;
   border-radius: 5px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  font-size: 14px;
   cursor: pointer;
 }
 
-.chapter-image:hover .save-button {
-  opacity: 1;
-  transform: translateY(0);
+.page-container:hover .save-button {
+  display: block;
 }
