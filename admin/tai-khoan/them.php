@@ -8,8 +8,9 @@ error_reporting(E_ALL);
 if (isset($_POST['btn_add_tai_khoan'])) {
     $ten_hien_thi = $_POST['ten_hien_thi'];
     $ten_tai_khoan = $_POST['ten_tai_khoan'];
-    $mat_khau = ($_POST['mat_khau']);
-    $phan_quyen = $_POST['phan_quyen'];
+    $mat_khau = md5($_POST['mat_khau']);
+    $xu = $_POST['Xu'] ? $_POST['Xu'] : 0;
+    $phan_quyen = $_POST['phan_quyen'] ? $_POST['phan_quyen'] : 2;
     $trang_thai = $_POST['trang_thai'];
 
     // tạo biến chứa lỗi
@@ -92,8 +93,8 @@ if (isset($_POST['btn_add_tai_khoan'])) {
 <?php if (isset($_POST['btn_add_tai_khoan'])) : ?>
     <?php if (!isset($errors) or (empty($errors))):
         $sql = <<<EOT
-		INSERT INTO tai_khoan(ten_hien_thi,ten_tai_khoan,mat_khau,phan_quyen,trang_thai) 
-		VALUES ('$ten_hien_thi','$ten_tai_khoan','$mat_khau', '$phan_quyen', '$trang_thai');
+		INSERT INTO tai_khoan(ten_hien_thi,ten_tai_khoan,mat_khau,xu,phan_quyen,trang_thai) 
+		VALUES ('$ten_hien_thi','$ten_tai_khoan','$mat_khau', '$xu' ,'$phan_quyen', '$trang_thai');
 EOT;
         mysqli_query($conn, $sql) or die("<b>Có lỗi khi thực hiện câu lệnh SQL: </b> " . mysqli_error($conn) . "<br/> <b>Câu lệnh vừa thực thi: </b> $sql");
         echo '<script> location.href="index.php?direction=tai-khoan&status=success";</script>';
@@ -171,7 +172,6 @@ EOT;
                             <label for="phan_quyen" class="form-label">Phân quyền</label>
                             <select class="form-select form-control" id="phan_quyen" name="phan_quyen">
                                 <option value="0">Admin</option>
-                                <option value="1">Mod</option>
                                 <option value="2">User</option>
                             </select>
                         </div>

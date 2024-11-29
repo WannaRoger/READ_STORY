@@ -1,6 +1,6 @@
 <?php
 $sql = <<<EOT
-        SELECT tai_khoan_id,ten_hien_thi,ten_tai_khoan,mat_khau,phan_quyen,trang_thai
+        SELECT tai_khoan_id,ten_hien_thi,ten_tai_khoan,mat_khau,phan_quyen,trang_thai,xu
         FROM tai_khoan
         ORDER BY tai_khoan_id DESC
 EOT;
@@ -12,6 +12,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         'ten_hien_thi' => $row['ten_hien_thi'],
         'ten_tai_khoan' => $row['ten_tai_khoan'],
         'mat_khau' => $row['mat_khau'],
+        'xu' => $row['xu'],
         'phan_quyen' => $row['phan_quyen'],
         'trang_thai' => $row['trang_thai'],
     );
@@ -49,10 +50,11 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                 <table id="table_tai-khoan" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>STT</th>
+
                             <th>Tên hiển thị</th>
                             <th>Tên tài khoản</th>
                             <th>Mật khẩu</th>
+                            <th>Xu</th>
                             <th>Trạng thái</th>
                             <th>Phân quyền</th>
                             <th class="text-center">
@@ -65,12 +67,10 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     <tbody>
                         <?php foreach ($data as $item): ?>
                             <tr>
-                                <td>
-                                    <p><?= $item['tai_khoan_id'] ?></p>
-                                </td>
-                                <td><?= $item['ten_hien_thi'] ?></td>
-                                <td><?= $item['ten_tai_khoan'] ?></td>
-                                <td><?= $item['mat_khau'] ?></td>
+                                <td class="text-center"><?= $item['ten_hien_thi'] ?></td>
+                                <td class="text-center"><?= $item['ten_tai_khoan'] ?></td>
+                                <td class="text-center"><?= $item['mat_khau'] ?></td>
+                                <td class="text-center"><?= $item['xu'] ?></td>
                                 <td class="text-center">
                                     <?php if ($item['trang_thai'] == 1) : ?>
                                         <i class="fa-solid fa-unlock"></i>
