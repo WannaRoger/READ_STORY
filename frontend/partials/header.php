@@ -73,6 +73,9 @@ EOT;
                 <a href="index.php?truyen-manga=truyen-dang-theo-doi">
                     <li>Đang Theo Dõi</li>
                 </a>
+                <a href="index.php?truyen-manga=truyen-trang-da-luu">
+                    <li>Trang đã lưu</li>
+                </a>
                 <hr>
                 <a href="./auth/chinh-sua.php">
                     <li>Chỉnh sửa</li>

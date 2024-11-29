@@ -304,21 +304,63 @@ if (isset($_SESSION['user_tai_khoan_id'])) {
                 </div>
             </div>
         </div>
-
         <?php foreach ($data as $item): ?>
             <div class="text-center">
                 <div class="text-center position-relative d-inline-block"
                     onmouseover="this.querySelector('button').classList.remove('d-none');"
                     onmouseout="this.querySelector('button').classList.add('d-none');">
-                    <img src="./assets/uploads/<?= $item['chapter_noi_dung'] ?>" class="img-fluid">
-                    <button class="btn btn-primary position-absolute top-50 start-50 translate-middle d-none"
-                        style="z-index: 10;" onclick="savePage('<?= $item['chapter_noi_dung_id'] ?>')">
+                    <img id="<?= $item['chapter_noi_dung_id'] ?>" src="./assets/uploads/<?= $item['chapter_noi_dung'] ?>"
+                        class="img-fluid">
+                    <button onclick="luuTrang(<?= $item['chapter_noi_dung_id'] ?>)"
+                        class="btn btn-primary position-absolute top-50 start-50 translate-middle d-none"
+                        style="z-index: 10;">
                         Lưu trang
                     </button>
                 </div>
             </div>
         <?php endforeach; ?>
 
+        <script>
+            var trangDaLuu = {};  // Theo dõi trạng thái lưu từng trang
+            var user_tai_khoan_id = $("#user_tai_khoan_id").val();
+
+            function luuTrang(chapter_noi_dung_id) {
+                // Kiểm tra đăng nhập
+                if (user_tai_khoan_id == 0) {
+                    let res = confirm("Vui lòng đăng nhập để sử dụng chức năng này");
+                    if (res == true) {
+                        location.href = "./auth/dang-nhap.php";
+                    }
+                    return;
+                }
+
+                // Kiểm tra trạng thái hiện tại của trang
+                const daLuu = trangDaLuu[chapter_noi_dung_id] || false;
+
+                // Gửi yêu cầu lưu trang
+                $.post("./frontend/pages/chapter/xu-ly-luu-trang.php", {
+                    btn_luu_trang: "btn_luu_trang",
+                    user_tai_khoan_id: user_tai_khoan_id,
+                    truyen_id: $("#truyen_id").val(),
+                    chapter_id: $("#chapter_id").val(),
+                    chapter_noi_dung_id: chapter_noi_dung_id,
+                }, function (data, status) {
+                    // Chọn nút tương ứng với trang
+                    const button = $(`button[onclick="luuTrang(${chapter_noi_dung_id})"]`);
+
+                    // Chuyển đổi trạng thái lưu
+                    if (!daLuu) {
+                        trangDaLuu[chapter_noi_dung_id] = true;
+                        button.text('Đã lưu').addClass('saved');
+                        $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) + 1);
+                    } else {
+                        trangDaLuu[chapter_noi_dung_id] = false;
+                        button.text('Lưu trang').removeClass('saved');
+                        $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) - 1);
+                    }
+                });
+            }
+        </script>
 
         <div class="manga-action">
             <div class="manga-action" id="manga-action">
