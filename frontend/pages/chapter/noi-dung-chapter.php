@@ -325,38 +325,38 @@ if (isset($_SESSION['user_tai_khoan_id'])) {
             var user_tai_khoan_id = $("#user_tai_khoan_id").val();
 
             function luuTrang(chapter_noi_dung_id) {
-                // Kiểm tra đăng nhập
-                if (user_tai_khoan_id == 0) {
-                    let res = confirm("Vui lòng đăng nhập để sử dụng chức năng này");
-                    if (res == true) {
-                        location.href = "./auth/dang-nhap.php";
-                    }
-                    return;
-                }
+                $.ajax({
+                    url: "./frontend/pages/chapter/xu-ly-luu-trang.php",
+                    type: "POST",
+                    data: {
+                        btn_thich: "btn_thich",
+                        user_tai_khoan_id: user_tai_khoan_id,
+                        truyen_id: $("#truyen_id").val(),
+                        chapter_id: $("#chapter_id").val(),
+                        chapter_noi_dung_id: chapter_noi_dung_id,
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            const button = $(`button[onclick="luuTrang(${chapter_noi_dung_id})"]`);
 
-                // Kiểm tra trạng thái hiện tại của trang
-                const daLuu = trangDaLuu[chapter_noi_dung_id] || false;
+                            if (response.action === 'added') {
+                                button.text('Đã lưu').addClass('saved');
+                                $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) + 1);
+                            } else if (response.action === 'removed') {
+                                button.text('Lưu trang').removeClass('saved');
+                                $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) - 1);
+                            }
 
-                // Gửi yêu cầu lưu trang
-                $.post("./frontend/pages/chapter/xu-ly-luu-trang.php", {
-                    btn_luu_trang: "btn_luu_trang",
-                    user_tai_khoan_id: user_tai_khoan_id,
-                    truyen_id: $("#truyen_id").val(),
-                    chapter_id: $("#chapter_id").val(),
-                    chapter_noi_dung_id: chapter_noi_dung_id,
-                }, function (data, status) {
-                    // Chọn nút tương ứng với trang
-                    const button = $(`button[onclick="luuTrang(${chapter_noi_dung_id})"]`);
-
-                    // Chuyển đổi trạng thái lưu
-                    if (!daLuu) {
-                        trangDaLuu[chapter_noi_dung_id] = true;
-                        button.text('Đã lưu').addClass('saved');
-                        $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) + 1);
-                    } else {
-                        trangDaLuu[chapter_noi_dung_id] = false;
-                        button.text('Lưu trang').removeClass('saved');
-                        $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) - 1);
+                            console.log(response.message);
+                        } else {
+                            alert(response.message);
+                            console.error(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi kết nối:", error);
+                        alert("Có lỗi xảy ra khi lưu trang");
                     }
                 });
             }
@@ -404,3 +404,19 @@ if (isset($_SESSION['user_tai_khoan_id'])) {
             <?php require_once __DIR__ . '/../truyen/truyen-ngau-nhien.php' ?>
         </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const pageId = urlParams.get('chapter_noi_dung_id');
+
+        if (pageId) {
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+    });
+</script>
