@@ -304,21 +304,63 @@ if (isset($_SESSION['user_tai_khoan_id'])) {
                 </div>
             </div>
         </div>
-
         <?php foreach ($data as $item): ?>
             <div class="text-center">
                 <div class="text-center position-relative d-inline-block"
                     onmouseover="this.querySelector('button').classList.remove('d-none');"
                     onmouseout="this.querySelector('button').classList.add('d-none');">
-                    <img src="./assets/uploads/<?= $item['chapter_noi_dung'] ?>" class="img-fluid">
-                    <button class="btn btn-primary position-absolute top-50 start-50 translate-middle d-none"
-                        style="z-index: 10;" onclick="savePage('<?= $item['chapter_noi_dung_id'] ?>')">
+                    <img id="<?= $item['chapter_noi_dung_id'] ?>" src="./assets/uploads/<?= $item['chapter_noi_dung'] ?>"
+                        class="img-fluid">
+                    <button onclick="luuTrang(<?= $item['chapter_noi_dung_id'] ?>)"
+                        class="btn btn-primary position-absolute top-50 start-50 translate-middle d-none"
+                        style="z-index: 10;">
                         Lưu trang
                     </button>
                 </div>
             </div>
         <?php endforeach; ?>
 
+        <script>
+            var trangDaLuu = {};  // Theo dõi trạng thái lưu từng trang
+            var user_tai_khoan_id = $("#user_tai_khoan_id").val();
+
+            function luuTrang(chapter_noi_dung_id) {
+                $.ajax({
+                    url: "./frontend/pages/chapter/xu-ly-luu-trang.php",
+                    type: "POST",
+                    data: {
+                        btn_thich: "btn_thich",
+                        user_tai_khoan_id: user_tai_khoan_id,
+                        truyen_id: $("#truyen_id").val(),
+                        chapter_id: $("#chapter_id").val(),
+                        chapter_noi_dung_id: chapter_noi_dung_id,
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            const button = $(`button[onclick="luuTrang(${chapter_noi_dung_id})"]`);
+
+                            if (response.action === 'added') {
+                                button.text('Đã lưu').addClass('saved');
+                                $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) + 1);
+                            } else if (response.action === 'removed') {
+                                button.text('Lưu trang').removeClass('saved');
+                                $("#data_luot_luu_trang").html(parseInt($("#data_luot_luu_trang").text()) - 1);
+                            }
+
+                            console.log(response.message);
+                        } else {
+                            alert(response.message);
+                            console.error(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi kết nối:", error);
+                        alert("Có lỗi xảy ra khi lưu trang");
+                    }
+                });
+            }
+        </script>
 
         <div class="manga-action">
             <div class="manga-action" id="manga-action">
@@ -362,3 +404,19 @@ if (isset($_SESSION['user_tai_khoan_id'])) {
             <?php require_once __DIR__ . '/../truyen/truyen-ngau-nhien.php' ?>
         </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const pageId = urlParams.get('chapter_noi_dung_id');
+
+        if (pageId) {
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+    });
+</script>
