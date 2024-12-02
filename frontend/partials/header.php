@@ -1,6 +1,10 @@
 <?php session_start() ?>
+
 <?php
+
 include_once(__DIR__ . '../../../backend/dbconnect.php');
+
+
 $sql = <<<EOT
     SELECT * 
     FROM the_loai
@@ -11,10 +15,13 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     $data[] = array(
         'the_loai_id' => $row['the_loai_id'],
         'the_loai_ten' => $row['the_loai_ten'],
+
     );
-}
-;
+};
+
+
 ?>
+
 
 <nav class="navbar">
     <div class="navbar-container" style="overflow: unset;">
@@ -65,6 +72,11 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     <a href="#">
                         <li><b><?= $_SESSION['user_ten_hien_thi'] ?></b></li>
                     </a>
+                    <a href="#">
+                        <?php if (!empty($_SESSION['user_xu'])): ?>
+                            Số xu hiện có: <b><?= $_SESSION['user_xu'] ?> </b> xu
+                        <?php endif ?>
+                    </a>
                     <a href="index.php?truyen-manga=truyen-da-xem">
                         <li>Truyện đã xem</li>
                     </a>
@@ -74,13 +86,13 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     <a href="index.php?truyen-manga=truyen-dang-theo-doi">
                         <li>Đang Theo Dõi</li>
                     </a>
-                    <a href="index.php?truyen-manga=truyen-luu-trang">
-                        <li>Trang đã lưu</li>
-                    </a>
+
+
                     <hr>
                     <a href="./auth/chinh-sua.php">
                         <li>Chỉnh sửa</li>
                     </a>
+                    <a href="">Nạp xu</a>
                     <hr>
                     <a href="./auth/dang-xuat.php">Đăng Xuất</a>
                 </div>
