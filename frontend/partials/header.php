@@ -1,6 +1,9 @@
 <?php session_start() ?>
 
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include_once(__DIR__ . '../../../backend/dbconnect.php');
 
 
@@ -72,7 +75,9 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                         <li><b><?= $_SESSION['user_ten_hien_thi'] ?></b></li>
                     </a>
                     <a href="#">
-                        Số xu hiện có: <?= $_SESSION['xu'] ?> xu
+                        <?php if (!empty($_SESSION['user_xu'])): ?>
+                            Số xu hiện có: <b><?= $_SESSION['user_xu'] ?> </b> xu
+                        <?php endif ?>
                     </a>
                     <a href="index.php?truyen-manga=truyen-da-xem">
                         <li>Truyện đã xem</li>

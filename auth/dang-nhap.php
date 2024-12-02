@@ -49,6 +49,8 @@ EOT;
                     $_SESSION["user"] = $ten_tai_khoan;
                     $_SESSION["user_ten_hien_thi"] = $data['ten_hien_thi'];
                     $_SESSION["user_tai_khoan_id"] = $data['tai_khoan_id'];
+                    $_SESSION["user_xu"] = $data['xu'];
+
                     echo "<script> location.href='../index.php';</script>";
                 }
             } else {
