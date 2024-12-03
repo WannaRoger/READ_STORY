@@ -23,6 +23,8 @@ if (isset($_POST['btn_update_tai_khoan'])) {
     $ten_hien_thi = $_POST['ten_hien_thi'];
     $ten_tai_khoan = $_POST['ten_tai_khoan'];
     $mat_khau = $_POST['mat_khau'] == $data_old['mat_khau'] ? $data_old['mat_khau'] : md5($_POST['mat_khau']);
+    $xu = $_POST['xu'];
+    var_dump($xu);
     $phan_quyen = $_POST['phan_quyen'];
     $trang_thai = $_POST['trang_thai'];
 
@@ -96,6 +98,28 @@ if (isset($_POST['btn_update_tai_khoan'])) {
             'msg' => 'Mật khẩu không được vượt quá 50 ký tự'
         ];
     }
+    if (!isset($xu) || $xu === '') {
+        $errors['$xu'][] = [
+            'rule' => 'required',
+            'rule_value' => true,
+            'value' => $xu,
+            'msg' => 'Vui lòng nhập xu'
+        ];
+    } elseif (!empty($xu) && !is_numeric($xu)) {
+        $errors['$xu'][] = [
+            'rule' => 'required',
+            'rule_value' => true,
+            'value' => $xu,
+            'msg' => 'Xu phải là số'
+        ];
+    } elseif ($xu < 0) {
+        $errors['$xu'][] = [
+            'rule' => 'minlength',
+            'rule_value' => 0,
+            'value' => $xu,
+            'msg' => 'Xu phải lớn hơn 0'
+        ];
+    }
 }
 // end check required và lenght
 ?>
@@ -108,6 +132,7 @@ if (isset($_POST['btn_update_tai_khoan'])) {
             ten_hien_thi = '$ten_hien_thi',
             ten_tai_khoan = '$ten_tai_khoan',
             mat_khau ='$mat_khau',
+            xu = '$xu',
             phan_quyen = '$phan_quyen',
             trang_thai = '$trang_thai'
         WHERE tai_khoan_id = '$tai_khoan_id';
@@ -192,31 +217,36 @@ EOT;
                                     value="<?= $data_old['mat_khau'] ?>">
                             </div>
                             <div class="col">
+                                <label for="xu" class="form-label">Xu</label>
+                                <input type="text" class="form-control" id="xu" name="xu"
+                                    value="<?= $data_old['xu'] ?>">
+                            </div>
+                            <div class="col">
                                 <label for="phan_quyen" class="form-label">Phân quyền</label>
                                 <select class="form-select form-control" id="phan_quyen" name="phan_quyen">
                                     <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'admin'): ?>
                                         <?php if ($data_old['phan_quyen'] == '0'): ?>
                                             <option value="0">Admin</option>
-                                            <option value="1">Mod</option>
+
                                             <option value="2">User</option>
                                         <?php elseif ($data_old['phan_quyen'] == '1'): ?>
-                                            <option value="1">Mod</option>
+
                                             <option value="0">Admin</option>
                                             <option value="2">User</option>
                                         <?php elseif ($data_old['phan_quyen'] == '2'): ?>
                                             <option value="2">User</option>
                                             <option value="0">Admin</option>
-                                            <option value="1">Mod</option>
+
                                         <?php endif ?>
                                     <?php else: ?>
                                         <?php if ($data_old['phan_quyen'] == '1'): ?>
-                                            <option value="1">Mod</option>
+
                                             <option value="0">Admin</option>
                                             <option value="2">User</option>
                                         <?php elseif ($data_old['phan_quyen'] == '2'): ?>
                                             <option value="2">User</option>
                                             <option value="0">Admin</option>
-                                            <option value="1">Mod</option>
+
                                         <?php endif ?>
                                     <?php endif ?>
                                 </select>

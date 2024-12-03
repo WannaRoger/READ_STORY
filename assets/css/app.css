@@ -17,8 +17,8 @@ html {
     height: 100%;
     font-family: sans-serif;
     -webkit-tap-highlight-color: transparent;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+    /* -ms-text-size-adjust: 100%; */
+    /* -webkit-text-size-adjust: 100%; */
 }
 
 body {

@@ -31,8 +31,10 @@
             $ten_hien_thi = $_POST['ten_hien_thi'];
             $ten_tai_khoan = $_POST['ten_tai_khoan'];
             $mat_khau = md5($_POST['mat_khau']);
+            $xu = '0';
             $trang_thai = '1';
             $phan_quyen = '2';
+
 
             if (strlen($ten_hien_thi) < 3 || strlen($ten_hien_thi) > 20) {
                 $check = false;
@@ -56,11 +58,12 @@
                     $msg = "Tài khoản đã tồn tại";
                 } else {
                     $sql = <<<EOT
-                        INSERT INTO tai_khoan(ten_hien_thi, ten_tai_khoan, mat_khau, trang_thai, phan_quyen) 
+                        INSERT INTO tai_khoan(ten_hien_thi, ten_tai_khoan, mat_khau,xu, trang_thai, phan_quyen) 
                         VALUES (
                         '$ten_hien_thi', 
                         '$ten_tai_khoan',
                         '$mat_khau',
+                        '$xu',
                         '$trang_thai',
                         '$phan_quyen')
     EOT;
