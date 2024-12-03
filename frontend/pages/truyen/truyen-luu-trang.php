@@ -103,8 +103,8 @@ while ($row = mysqli_fetch_array($result_truyen_luu_trang, MYSQLI_ASSOC)) {
                         </a>
                         <a
                             href="index.php?truyen-manga=noi-dung-chapter&truyen_id=<?= $item['truyen_id'] ?>&chapter_id=<?= $item['chapter_id'] ?>&chapter_so=<?= $item['chapter_so'] ?>&chapter_noi_dung_id=<?= $item['chapter_noi_dung_id'] ?>">
-                            <h3 class="item-title">
-                                <?= $item['truyen_ten'] ?>, Trang số: <?= $item['chapter_noi_dung_id'] ?>
+                            <h3 class="item-title-truyen">
+                                <?= $item['truyen_ten'] ?>,Chapter: <?= $item['chapter_so'] ?>,Trang số: <?= $item['chapter_noi_dung_id'] ?>
                             </h3>
                         </a>
                     </div>

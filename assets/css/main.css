@@ -291,13 +291,14 @@ section .section-title {
     width: 100%
 }
 
-.item-medium .item-title {
-    max-height: 46px;
-    font-weight: 400;
-    line-height: 25px;
-    overflow: hidden;
-    text-align: center
+.item-medium .item-title-truyen {
+    font-weight: 400;       /* Giữ kiểu chữ regular */
+    line-height: 25px;      /* Khoảng cách giữa các dòng */
+    text-align: center;     /* Canh giữa theo chiều ngang */
+    max-height: 46px;       /* Loại bỏ giới hạn chiều cao */
+    overflow: visible;      /* Hiển thị toàn bộ nội dung */
 }
+
 
 
 /* section item-big */

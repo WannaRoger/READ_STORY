@@ -396,7 +396,7 @@ if (isset($_SESSION['user_tai_khoan_id'])) {
         </div>
         <div class="manga-comment">
             <div class="fb-comments"
-                data-href="https://truyencover.herokuapp.com/index.php?truyen-manga=noi-dung-chapter&truyen_id=<?= $data[0]['truyen_id']; ?>&chapter_so=<?= $item_chapter['chapter_so'] ?>"
+                data-href="https://www.facebook.com/index.php?truyen-manga=noi-dung-chapter&truyen_id=<?= $data[0]['truyen_id']; ?>&chapter_so=<?= $item_chapter['chapter_so'] ?>"
                 data-width="100%" data-numposts="3"></div>
         </div>
         <!-- truyen ngau nhien -->
