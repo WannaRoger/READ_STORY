@@ -27,7 +27,7 @@ EOT;
 EOT;
         mysqli_query($conn, $sql);
         // điều hướng về trang danh sách
-        echo "<script>location.href = 'index.php?result=success';</script>";
+        echo "<script>location.href = 'index.php?direction=tai-khoan&status=success';</script>";
     } else {
         echo "<script>location.href = 'index.php?result=error';</script>";
     }
