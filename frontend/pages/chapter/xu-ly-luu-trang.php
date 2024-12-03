@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // sự kiện bấm nút thích
     if (isset($_POST['btn_thich'])) {
         // Làm sạch và kiểm tra dữ liệu đầu vào
-        $tai_khoan_id = mysqli_real_escape_string($conn, $_POST['user_tai_khoan_id']);
-        $truyen_id = mysqli_real_escape_string($conn, $_POST['truyen_id']);
-        $chapter_id = mysqli_real_escape_string($conn, $_POST['chapter_id']);
-        $chapter_noi_dung_id = mysqli_real_escape_string($conn, $_POST['chapter_noi_dung_id']);
+        $tai_khoan_id = mysqli_real_escape_string($conn, $_POST['user_tai_khoan_id'] ?? '');
+        $truyen_id = mysqli_real_escape_string($conn, $_POST['truyen_id'] ?? '');
+        $chapter_id = mysqli_real_escape_string($conn, $_POST['chapter_id'] ?? '');
+        $chapter_noi_dung_id = mysqli_real_escape_string($conn, $_POST['chapter_noi_dung_id'] ?? '');
 
         // Kiểm tra tính hợp lệ của dữ liệu
         if (empty($tai_khoan_id) || empty($truyen_id) || empty($chapter_id) || empty($chapter_noi_dung_id)) {
@@ -94,5 +94,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Trả về phản hồi dưới dạng JSON
 echo json_encode($response);
 exit;
-
-?>
