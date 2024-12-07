@@ -3,28 +3,28 @@
 
         <!-- chapter moi -->
         <section>
-            <?php require_once __DIR__.'/truyen/chapter-moi-nhat.php'?>
+            <?php //require_once __DIR__.'/truyen/chapter-moi-nhat.php'
+            ?>
         </section>
 
         <section>
             <!-- Truyện mới nhất -->
-            <?php require_once __DIR__.'/truyen/truyen-moi-nhat.php'?>
+            <?php require_once __DIR__ . '/truyen/truyen-moi-nhat.php' ?>
             <!-- Truyện top tuần -->
-            <?php require_once __DIR__.'/truyen/truyen-top-view.php'?>
+            <?php require_once __DIR__ . '/truyen/truyen-top-view.php' ?>
         </section>
 
         <!-- truyen-da-hoan-thanh -->
         <section>
-            <?php require_once __DIR__.'/truyen/truyen-da-hoan-thanh.php'?>
+            <?php require_once __DIR__ . '/truyen/truyen-da-hoan-thanh.php' ?>
         </section>
 
         <!-- truyen-dang-cap-nhat -->
         <section>
-            <?php require_once __DIR__.'/truyen/truyen-dang-cap-nhat.php'?>
+            <?php require_once __DIR__ . '/truyen/truyen-dang-cap-nhat.php' ?>
         </section>
     </div>
 </div>
 
 <!-- floating-action -->
-<?php require_once __DIR__.'/../partials/floating-action.php'?>
-
+<?php require_once __DIR__ . '/../partials/floating-action.php' ?>

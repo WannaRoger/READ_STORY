@@ -10,4 +10,5 @@
 </footer>
 
 <!-- floating-action -->
-<?php require_once __DIR__ . '/../partials/floating-action.php' ?>
+<?php require_once __DIR__ . '/../partials/floating-action.php'
+?>

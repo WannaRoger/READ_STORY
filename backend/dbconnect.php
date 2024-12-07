@@ -1,7 +1,8 @@
 <?php
-//mysql://b4d90a3aebc398:6d2f4ef9@us-cdbr-east-06.cleardb.net/heroku_95b5f48f3ea586c?reconnect=true
 
-// $conn = mysqli_connect('us-cdbr-east-06.cleardb.net', 'b4d90a3aebc398', '6d2f4ef9', 'heroku_95b5f48f3ea586c') or die('Xin lỗi, database không kết nối được.');
+// Tạo kết nối
+
+// Kết nối với database
 $conn = mysqli_connect('localhost', 'root', '', 'du_an_1.1') or die('Xin lỗi, database không kết nối được.');
 
 // Tùy chỉnh kết nối

@@ -105,9 +105,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                                 <a href="index.php?direction=sua-tai-khoan&tai_khoan_id=<?= $item['tai_khoan_id'] ?>"
                                                     class="btn btn-warning mr-2"><i class="fa fa-pencil" aria-hidden="true"></i>
                                                     Sửa</a>
-                                                <button type="button" class="btn btn-danger btn-delete"
-                                                    data-tai_khoan_id=<?= $item['tai_khoan_id'] ?>>
-                                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+
                                                 </button>
                                             </div>
                                         <?php endif ?>
