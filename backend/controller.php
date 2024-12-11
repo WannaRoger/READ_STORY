@@ -42,8 +42,10 @@ if (isset($_GET['tim-kiem'])) {
         case 'truyen-luu-trang':
             include_once(__DIR__ . '/../frontend/pages/truyen/truyen-luu-trang.php');
             break;
+        case 'nap-xu':
+            include_once(__DIR__ . '/../frontend/pages/nap-xu/nap-xu.php');
+            break;
     }
 } else {
     include_once(__DIR__ . '/../frontend/pages/main.php');
 }
-?>

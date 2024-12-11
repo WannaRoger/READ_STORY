@@ -94,7 +94,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     <a href="./auth/chinh-sua.php">
                         <li>Chỉnh sửa</li>
                     </a>
-                    <a href="">Nạp xu</a>
+                    <a href="./frontend/pages/nap-xu/nap-xu.php">Nạp xu</a>
                     <hr>
                     <a href="./auth/dang-xuat.php">Đăng Xuất</a>
                 </div>
