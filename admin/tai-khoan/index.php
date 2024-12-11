@@ -59,7 +59,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                             <th>Phân quyền</th>
                             <th class="text-center">
                                 <a href="index.php?direction=them-tai-khoan">
-                                    <div class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</div>
+                                    <!-- <div class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</div> -->
                                 </a>
                             </th>
                         </tr>

@@ -235,7 +235,7 @@ EOT;
                                             <option value="2">User</option>
                                         <?php elseif ($data_old['phan_quyen'] == '2'): ?>
                                             <option value="2">User</option>
-                                            <option value="0">Admin</option>
+                                            <!-- <option value="0">Admin</option> -->
 
                                         <?php endif ?>
                                     <?php else: ?>

@@ -9,7 +9,7 @@ if (isset($_POST['btn_add_tai_khoan'])) {
     $ten_hien_thi = $_POST['ten_hien_thi'];
     $ten_tai_khoan = $_POST['ten_tai_khoan'];
     $mat_khau = md5($_POST['mat_khau']);
-    $xu = $_POST['Xu'] ? $_POST['Xu'] : 0;
+    $xu = $_POST['xu'] ? $_POST['xu'] : 0;
     $phan_quyen = $_POST['phan_quyen'] ? $_POST['phan_quyen'] : 2;
     $trang_thai = $_POST['trang_thai'];
 
@@ -90,11 +90,11 @@ if (isset($_POST['btn_add_tai_khoan'])) {
 ?>
 
 <!-- thêm thông tin -->
-<?php if (isset($_POST['btn_add_tai_khoan'])) : ?>
+<?php if (isset($_POST['btn_add_tai_khoan'])): ?>
     <?php if (!isset($errors) or (empty($errors))):
         $sql = <<<EOT
 		INSERT INTO tai_khoan(ten_hien_thi,ten_tai_khoan,mat_khau,xu,phan_quyen,trang_thai) 
-		VALUES ('$ten_hien_thi','$ten_tai_khoan','$mat_khau', '$xu' ,'$phan_quyen', '$trang_thai');
+		VALUES ('$ten_hien_thi','$ten_tai_khoan','$mat_khau','$xu' ,'$phan_quyen', '$trang_thai');
 EOT;
         mysqli_query($conn, $sql) or die("<b>Có lỗi khi thực hiện câu lệnh SQL: </b> " . mysqli_error($conn) . "<br/> <b>Câu lệnh vừa thực thi: </b> $sql");
         echo '<script> location.href="index.php?direction=tai-khoan&status=success";</script>';
@@ -134,11 +134,10 @@ EOT;
                 <div class="add-update">
                     <!-- vùng hiển thị lỗi -->
 
-                    <?php if (isset($_POST['btn_add_tai_khoan'])) : ?>
+                    <?php if (isset($_POST['btn_add_tai_khoan'])): ?>
                         <?php if (isset($errors) && (!empty($errors))): ?>
 
-                            <div id="errors-container" class="alert alert-danger alert-dismissible fade show mt-2"
-                                role="alert">
+                            <div id="errors-container" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
