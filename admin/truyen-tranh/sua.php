@@ -207,7 +207,7 @@ EOT;
             <div class="index">
                 <div class="head">
                     <h3>Cập nhật truyện tranh</h3>
-                    <a href="truyen-the-loai.php?truyen_id=<?=$data_old['truyen_id']?>" class="btn btn-secondary"><i
+                    <a href="index.php?direction=truyen-the-loai&truyen_id=<?=$data_old['truyen_id']?>" class="btn btn-secondary"><i
                             class="fa-solid fa-book-bible"></i> Cập nhật truyện thể loại
                     </a>
                     <a href="index.php?direction=chapter&truyen_id=<?=$data_old['truyen_id']?>"
